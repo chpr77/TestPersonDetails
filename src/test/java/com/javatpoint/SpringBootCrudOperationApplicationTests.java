@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.javatpoint.model.Person;
 import com.javatpoint.model.PersonAddress;
+import com.javatpoint.model.PersonAddressIdentity;
 import com.javatpoint.repository.PersonAddressRepository;
 import com.javatpoint.repository.PersonRepository;
 
@@ -50,21 +51,25 @@ class SpringBootCrudOperationApplicationTests {
 	    @Test
 	    public void testSaveAddressPerson() {
 	    	entityManager.persistAndFlush(new Person(10,"Paramesh", "Ch"));
-	        entityManager.persistAndFlush(new PersonAddress(20,10,"Telangana", "hyd","Kukatpally","200000"));
-	                 
-	         PersonAddress personAddress = addressRepository.findByAddressIdAndPersonId(20, 10);
+	        entityManager.persistAndFlush(new PersonAddress(new PersonAddressIdentity(20,10),"Telangana", "hyd","Kukatpally","200000"));
+	         PersonAddressIdentity pAI=new PersonAddressIdentity(); 
+	         pAI.setAddressId(20);
+	         pAI.setPersonId(10);
+	         Optional<PersonAddress> personAddress = addressRepository.findById(pAI);
 	         
-	        assertThat(personAddress.getAddressId()).isEqualTo(20);
+	        assertThat(personAddress.get().getPersonIdentity().getAddressId()).isEqualTo(20);
 	    }
 	    
 	    //Deleting Person
 	    @Test
 	    public void testDeletePersonAddress() {
 	    	entityManager.persistAndFlush(new Person(10,"Paramesh", "Ch"));
-	        entityManager.persistAndFlush(new PersonAddress(20,10,"Telangana", "hyd","Kukatpally","200000"));
-
-	        addressRepository.deleteAddress(20, 10);;
-	        PersonAddress personAddress = addressRepository.findByAddressIdAndPersonId(20, 10);	    
+	    	entityManager.persistAndFlush(new PersonAddress(new PersonAddressIdentity(20,10),"Telangana", "hyd","Kukatpally","200000"));
+	    	 PersonAddressIdentity pAI=new PersonAddressIdentity(); 
+	         pAI.setAddressId(20);
+	         pAI.setPersonId(10);
+	        addressRepository.deleteById(pAI);
+	        Optional<PersonAddress> personAddress = addressRepository.findById(pAI);
 	        if(personAddress==null) {
 	        	 assertThat(true);
 	        }
