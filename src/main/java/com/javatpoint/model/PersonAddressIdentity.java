@@ -1,6 +1,6 @@
-
 package com.javatpoint.model;
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
@@ -24,14 +24,39 @@ public class PersonAddressIdentity implements Serializable{
 		return addressId;
 	}
 
-	  
-  public void setAddressId(int addressId) {
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + addressId;
+		result = prime * result + personId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PersonAddressIdentity other = (PersonAddressIdentity) obj;
+		if (addressId != other.addressId)
+			return false;
+		if (personId != other.personId)
+			return false;
+		return true;
+	}
+
+	public void setAddressId(int addressId) {
 		this.addressId = addressId;
 	}
 	public PersonAddressIdentity(){
 		
 	}
-  public PersonAddressIdentity(int addressId, int personId) {
+
+	public PersonAddressIdentity(int addressId, int personId) {
 		super();
 		this.addressId = addressId;
 		this.personId = personId;
@@ -48,7 +73,6 @@ public class PersonAddressIdentity implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	
 }
-
-  
-  

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.javatpoint.model.Books;
 import com.javatpoint.model.Person;
 import com.javatpoint.repository.PersonRepository;
 //defining the business logic

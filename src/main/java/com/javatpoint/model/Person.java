@@ -18,6 +18,7 @@ public class Person implements Serializable{
     private int personId;  
 	@Column(name="FIRST_NAME")
     private String firstName;
+	public Person() {}
 	public Person(int personId, String firstName, String lastName) {
 		super();
 		this.personId = personId;
