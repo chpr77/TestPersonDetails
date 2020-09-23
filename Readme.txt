@@ -55,18 +55,21 @@ http://localhost:8080/savePerson
 http://localhost:8080/delete/10
 
 
-//It will cover save and update
+//It will cover save and update(POST)
 http://localhost:8080/savePersonAddress
 {
-    "personId": "12",   
+    "personIdentity":{"addressId":40,"personId":14},   
     "state": "AP",
     "street": "Arundalpet",
     "city": "Guntur",
-    "postalCode": "52"
+    "postalCode": "522658"
 }
 
-/It will cover save and update
-http://localhost:8080/deletePersonAddress/20/12
+/It will cover delete
+http://localhost:8080/deletePersonAddress/40/14
+
+
+
 
 
 
